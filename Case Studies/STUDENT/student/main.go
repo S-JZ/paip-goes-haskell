@@ -19,12 +19,13 @@ type Rule struct {
 type mapStrStr map[string]string
 
 // matchPatterns recursively matches patterns to the input, starting
-// with the topmost pattern, and then works its way down nested patterns, 
-// if found.  
-// 
-// It takes two parameters: 
-// 		rules   - a list of rules to match against
-// 		toMatch - a list of strings to match against the rules
+// with the topmost pattern, and then works its way down nested patterns,
+// if found.
+//
+// It takes two parameters:
+//
+//	rules   - a list of rules to match against
+//	toMatch - a list of strings to match against the rules
 //
 // toMatch is a list of strings because the input may contain nested
 // patterns, and we need to match them from the outermost pattern to the
@@ -33,11 +34,11 @@ type mapStrStr map[string]string
 // For example, if the input is "what is the sum of 3 and 4", then the
 // parsing will be done as follows, adding each match to toMatch:
 //
-// 		what is 3 plus 4
-// 			├── what
-// 			└── 3 plus 4
-// 					├── 3 
-// 					└── 4
+//	what is 3 plus 4
+//		├── what
+//		└── 3 plus 4
+//				├── 3
+//				└── 4
 //
 // While matching, it also builds a list of equations in prefix notation
 // and a map of variables to their full expanded form.  For example, if
@@ -146,10 +147,10 @@ func matchRule(input string, rule Rule) ([]string, bool) {
 // case is "(+ ?x ?y)".  The resulting expression will be "(+ 3 4)",
 // which will be added to the list of equations given by `eq`.
 //
-// `expanded` will use `matched` to determine the variable name (or) 
+// `expanded` will use `matched` to determine the variable name (or)
 // the key for the expression. Thus, expanded[variable-name] = expression.
 func applyRule(rule Rule, matched string, matches []string, eq *[]string, expanded *mapStrStr) {
-	// some rules only have one variable to match, 
+	// some rules only have one variable to match,
 	// so we use a conditional to check for that
 	expression := strings.Replace(rule.expression, "?x", makeVariable(matches[0]), -1)
 	if len(matches) > 1 {
@@ -166,24 +167,28 @@ func applyRule(rule Rule, matched string, matches []string, eq *[]string, expand
 // returns a map of variables to their values.
 //
 // Parameters:
-// 		eqns - a list of equations in infix notation
+//
+//	eqns - a list of equations in infix notation
 //
 // Returns:
-// 		variables - a map of variables to their values
 //
-// The purpose of this function is to extract the variables from 
+//	variables - a map of variables to their values
+//
+// The purpose of this function is to extract the variables from
 // the infix notation and in a way, "assign" them to their values.
 // For example, if the input is:
-// 		{
-//			"what = plus",
-//			"plus = (+ 3 4)"
-//		}
+//
+//	{
+//		"what = plus",
+//		"plus = (+ 3 4)"
+//	}
 //
 // Then the output will be:
-// 		{
-//			"what": "plus",
-//		    "plus": "(+ 3 4)"
-//		}
+//
+//	{
+//		"what": "plus",
+//	    "plus": "(+ 3 4)"
+//	}
 func bindVariables(eqns []string) map[string]string {
 	variables := make(map[string]string)
 	for _, eq := range eqns {
@@ -205,23 +210,27 @@ func bindVariables(eqns []string) map[string]string {
 // with their values.
 //
 // Parameters:
-// 		eqns - a map of equations in infix notation
+//
+//	eqns - a map of equations in infix notation
 //
 // Returns:
-// 		eqns - same map, but with variables substituted
+//
+//	eqns - same map, but with variables substituted
 //
 // It substitutes the values of the variables in the equations until
 // no more substitutions are possible.  For example, if the input is:
-// 		{
-//			"what": "plus",
-//			"plus": "(+ 3 4)"
-//		}
+//
+//	{
+//		"what": "plus",
+//		"plus": "(+ 3 4)"
+//	}
 //
 // Then the output will be:
-// 		{
-//			"what": "(+ 3 4)"
-//		    "plus": "(+ 3 4)"
-//		}
+//
+//	{
+//		"what": "(+ 3 4)"
+//	    "plus": "(+ 3 4)"
+//	}
 func substituteVariables(eqns map[string]string) map[string]string {
 	// Keep track of whether any substitutions were made
 	madeSubstitution := true
@@ -246,14 +255,16 @@ func substituteVariables(eqns map[string]string) map[string]string {
 	return eqns
 }
 
-// prefixToInfix takes a prefix notation expression and converts 
+// prefixToInfix takes a prefix notation expression and converts
 // it to infix notation. It uses a stack to perform the conversion.
 //
 // Parameters:
-// 		exp - a prefix notation expression
+//
+//	exp - a prefix notation expression
 //
 // Returns:
-// 		infixExp - the same expression in infix notation
+//
+//	infixExp - the same expression in infix notation
 func prefixToInfix(exp string) string {
 	var stack []string
 
@@ -279,16 +290,16 @@ func prefixToInfix(exp string) string {
 
 // completeEquations takes an expression and a map of expansions and
 // completes the expression if it is incomplete.
-// 
+//
 // Incomplete expressions are simply expressions that are not part of
-// an equation. 
-// 
-// For example, for the problem: "what is 3 plus 4", the parsed 
+// an equation.
+//
+// For example, for the problem: "what is 3 plus 4", the parsed
 // expression of "3 plus 4" is (+ 3 4). This expression is incomplete
-// because it is not part of an equation. 
+// because it is not part of an equation.
 
-// Thus, completeEquations will complete the expression by assigning 
-// it to an appropriate variable and adding it to the map of 
+// Thus, completeEquations will complete the expression by assigning
+// it to an appropriate variable and adding it to the map of
 // expansions for future use.
 func completeEquations(exp *string, expanded mapStrStr) {
 	elements := strings.Fields(trimParantheses(*exp))
@@ -306,14 +317,16 @@ func completeEquations(exp *string, expanded mapStrStr) {
 // were not parsed before, if it happens to be a pattern itself.
 //
 // Parameters:
-// 		matches     - list of strings, each of which is a part of the
-// 				      input that matched a pattern
-// 		toMatch     - pointer to the slice of strings to be parsed
-// 		haveMatched - pointer to a map of strings to booleans, which
-// 					  keeps track of which strings have been parsed
+//
+//	matches     - list of strings, each of which is a part of the
+//			      input that matched a pattern
+//	toMatch     - pointer to the slice of strings to be parsed
+//	haveMatched - pointer to a map of strings to booleans, which
+//				  keeps track of which strings have been parsed
 //
 // Returns:
-// 		none, but toMatch and haveMatched are modified in place
+//
+//	none, but toMatch and haveMatched are modified in place
 func addIfNotPresent(matches []string, toMatch *[]string, haveMatched *map[string]bool) {
 	for _, match := range matches {
 		if !(*haveMatched)[match] {
@@ -323,15 +336,17 @@ func addIfNotPresent(matches []string, toMatch *[]string, haveMatched *map[strin
 	}
 }
 
-// removeNoiseWords removes words that are not significant 
+// removeNoiseWords removes words that are not significant
 // to the problem. It iterates over the words in the input
 // and removes the words that are not significant.
 //
 // Parameters:
-// 		input - a string of words
+//
+//	input - a string of words
 //
 // Returns:
-// 		noiseFree - the same string, but free of noise words
+//
+//	noiseFree - the same string, but free of noise words
 func removeNoiseWords(input string) string {
 	words := strings.Split(input, " ")
 	var noiseFree []string
@@ -369,12 +384,14 @@ func makeVariable(match string) string {
 // This is used to get the variable name for the expression.
 //
 // Parameters:
-// 		exp      - the expression to find the expansion for
-// 		expanded - the map of expansions
+//
+//	exp      - the expression to find the expansion for
+//	expanded - the map of expansions
 //
 // Returns:
-// 		key - the key in the map that corresponds to the expression
-// 		ok  - true if the key was found, false otherwise
+//
+//	key - the key in the map that corresponds to the expression
+//	ok  - true if the key was found, false otherwise
 func getExpansion(exp string, expanded mapStrStr) (string, bool) {
 	for k, v := range expanded {
 		if exp == v {
@@ -414,7 +431,7 @@ func isOperator(op string) bool {
 	return false
 }
 
-// trimParantheses removes the outermost parantheses 
+// trimParantheses removes the outermost parantheses
 // from an expression.
 func trimParantheses(exp string) string {
 	exp = strings.TrimPrefix(exp, "(")
@@ -427,7 +444,7 @@ func addParantheses(exp string) string {
 	return "(" + exp + ")"
 }
 
-// removeAllParantheses removes all occurences of 
+// removeAllParantheses removes all occurences of
 // parantheses from an expression.
 func removeAllParantheses(exp string) string {
 	exp = strings.Replace(exp, "(", "", -1)
