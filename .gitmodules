@@ -1,0 +1,3 @@
+[submodule "Case Studies/STUDENT/student-go-api"]
+	path = Case Studies/STUDENT/student-go-api
+	url = https://gitlab.com/indujashankar/student-go-api
