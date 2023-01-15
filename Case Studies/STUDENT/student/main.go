@@ -4,9 +4,9 @@ package main
 
 import (
 	"fmt"
+	"github.com/marcak/calc/calc"
 	"regexp"
 	"strings"
-	"github.com/marcak/calc/calc"
 )
 
 // Rule represents a pattern and an expression to be applied to the pattern
@@ -50,15 +50,15 @@ type mapStrStr map[string]string
 // Thus, it returns two values:
 // 		prefixEqns - a list of parsed equations in prefix notation
 // 		expanded   - a map of variables to their full expanded form
-// 
+//
 // expanded is a map of variables mapped to their full expanded form.
-// At the moment, variables are simply named by choosing the first 
+// At the moment, variables are simply named by choosing the first
 // non-numerical word in the matched string.  For example, if the input
 // is "what is the sum of 3 and 4", then the expanded map will contain
 // the following:
 //
 // 		{
-//			"what": "(= what plus)", 
+//			"what": "(= what plus)",
 //			"plus": "(+ 3 4)"
 //		}
 //
@@ -97,11 +97,11 @@ func matchPatterns(rules []Rule, toMatch []string) ([]string, mapStrStr) {
 	return prefixEqns, expanded
 }
 
-// matchRule matches a string against one rule.  
-// 
-// If the string matches the pattern specified in the rule, 
-// then it returns the matched parts of the string, and a 
-// boolean to denote that a match was found.  Otherwise, 
+// matchRule matches a string against one rule.
+//
+// If the string matches the pattern specified in the rule,
+// then it returns the matched parts of the string, and a
+// boolean to denote that a match was found.  Otherwise,
 // it returns an empty list and false.
 //
 // Parameters:
@@ -138,10 +138,10 @@ func matchRule(input string, rule Rule) ([]string, bool) {
 // expression specified by the rule, and then adds the expression to
 // the list of equations given by `eq`.
 //
-// The string `match` is used to create a variable name for the 
+// The string `match` is used to create a variable name for the
 // expression, which is as the shorthand for the expression in the
 // expanded map. For example, if the input is "what is 3 plus 4", then:
-// 		`matched` will be "3 plus 4", and 
+// 		`matched` will be "3 plus 4", and
 // 		`matches` will be ["3", "4"].
 // `matches` will be substituted into the expression, which in this
 // case is "(+ ?x ?y)".  The resulting expression will be "(+ 3 4)",
