@@ -1,5 +1,6 @@
 # Paip GOes Haskell
 
+[![Scc Count Badge](https://sloc.xyz/gitlab/indujashankar/paip-goes-haskell)](https://gitlab.com/indujashankar/paip-goes-haskell)
 [![Go Report Card](https://goreportcard.com/badge/gitlab.com/indujashankar/paip-goes-haskell)](https://goreportcard.com/report/gitlab.com/indujashankar/paip-goes-haskell)
 
 Implementations of early AI programs from the fantastic textbook 'Paradigms of Artificial Intelligence Programming' by Peter Norvig, originally written in Lisp, in Haskell and Golang.
