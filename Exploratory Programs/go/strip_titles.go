@@ -23,7 +23,7 @@ func stripTitles(nameAsList []string, titleSet map[string]bool) string {
 	if titleSet[nameAsList[0]] {
 		return stripTitles(nameAsList[1:], titleSet)
 	}
-	
+
 	return strings.Join(nameAsList, " ")
 }
 

@@ -8,14 +8,14 @@ package main
 
 import (
 	"fmt"
-	"strings"
 	"reflect"
+	"strings"
 )
 
 type exp struct {
-	op rune
+	op  rune
 	lhs interface{}
-    rhs interface{}
+	rhs interface{}
 }
 
 type rule []string

@@ -20,7 +20,7 @@ func triangle(row int, syml string) string {
 }
 
 func pyramidLine(row int, syml string) string {
-	return strings.Repeat(syml, 2 * row + 1)
+	return strings.Repeat(syml, 2*row+1)
 }
 
 func pyramid(sz int, syml string) string {
