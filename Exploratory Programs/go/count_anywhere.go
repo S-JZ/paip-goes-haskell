@@ -1,15 +1,15 @@
 // Count Anywhere
-// 
+//
 // Write a function that counts the number of times an expression
 // occurs anywhere within another expression. Example: (count-anywhere 'a *(a ((a) b) a)) = 3.
-// 
+//
 // 	(defun count-anywhere (item tree)
 // 		"Count the times item appears anywhere within tree."
 // 		(cond ((eql item tree) 1)
 // 			((atom tree) 0)
 // 			(t (+ (count-anywhere item (first tree))
 // 				  (count-anywhere item (rest tree))))))
-// 
+//
 
 package main
 
