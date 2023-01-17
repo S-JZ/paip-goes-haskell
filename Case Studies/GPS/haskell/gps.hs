@@ -1,27 +1,20 @@
-{-
-     testing with different cases
-     globalState <- newIORef ["son at home", "car works"]
-     globalState <- newIORef ["son at home", "car needs battery", "shop knows problem", "shop has money"]
-     globalState <- newIORef ["in communication with shop", "shop has money", "car needs battery", "son at home"]
-     globalState <- newIORef ["in communication with shop", "shop has money", "son at home"]
-     globalState <- newIORef ["know phone number", "shop has money", "car needs battery", "son at home"] 
-     globalState <- newIORef ["have phone book", "shop has money", "car needs battery", "son at home"] 
-
--}
-
 import Data.IORef
 import qualified Data.Foldable as F
 import qualified Data.Traversable as T
 import qualified Data.List as L
+import qualified Data.Text as DT
 
 type State = String
 
 makeInitialState = do
-    globalState <- newIORef ["son at home", "car needs battery", "have money", "have phone book"]
+    userInput <- getInputFromUser "States"
+    globalState <- newIORef userInput
     return globalState
 
-goals :: [State]
-goals = ["son at school"]
+getInputFromUser askUser = do
+    putStrLn $ "Enter " ++ askUser
+    userInputStates <- getLine
+    return $ map (DT.unpack) $ DT.splitOn (DT.pack ", ") (DT.pack userInputStates)
 
 prefix = "Executing"
 
@@ -71,6 +64,10 @@ operators = [
                     }  
            ]
 
+revOperators = reverse operators
+
+goalStack = []
+ 
 gps states goals operators = do
     achievedState' <- achieveAll states operators goals []
     case achievedState' of 
@@ -145,8 +142,6 @@ applyOperator operator states operators goal goalStack = do
 main = do
      states <- makeInitialState
      readStatesArr <- readIORef states 
-     putStrLn "States"
-     print $ readStatesArr 
+     goals <- getInputFromUser "Goals"
      finalStates <- gps states goals operators
      putStrLn $ L.intercalate "\n" finalStates
-
