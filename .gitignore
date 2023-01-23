@@ -1,3 +1,6 @@
 .ipynb_checkpoints
-
+.env
 .o
+__pycache__
+db.sqlite3
+migrations
