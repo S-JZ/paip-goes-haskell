@@ -1,0 +1,394 @@
+<html lang="en">
+  <head>
+    <title>GPS</title>
+
+    <style>
+      html {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background: linear-gradient(#141e30, #243b55);
+      }
+
+      p {
+        font-size: 16px;
+        color: #f9f9f9;
+      }
+
+      h3 {
+        color: white;
+      }
+
+      .show-intermediates-btn {
+        background: none;
+        color: white;
+        text-decoration: underline;
+        border: none;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+      }
+
+      .show-intermediates-div {
+        display: none;
+        color: white;
+      }
+
+      .result-box {
+        color: white;
+        width: 100%;
+        font-size: 16px;
+        resize: vertical;
+        border: none;
+        display: block;
+        min-height: 120px;
+        background-color: transparent;
+        border-bottom: transparent;
+      }
+
+      .textarea {
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        resize: both;
+        min-height: 40px;
+        line-height: 20px;
+      }
+
+      .textarea[contenteditable]:empty::before {
+        content: "Placeholder still possible";
+        color: gray;
+      }
+
+      .login-box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 200px;
+        width: 60%;
+        padding: 40px;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.5);
+        box-sizing: border-box;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+        border-radius: 10px;
+      }
+
+      .login-box h2 {
+        margin: 0 0 30px;
+        padding: 0;
+        color: #ffffff;
+        text-align: center;
+      }
+      
+      .login-box form a {
+        position: relative;
+        display: inline-block;
+        padding: 10px 20px;
+        color: #03e9f4;
+        font-size: 16px;
+        text-decoration: none;
+        text-transform: uppercase;
+        overflow: hidden;
+        transition: 0.5s;
+        margin-top: 40px;
+        letter-spacing: 4px;
+      }
+
+      .login-box a:hover {
+        background: #03e9f4;
+        color: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
+          0 0 100px #03e9f4;
+      }
+
+      .login-box a span {
+        position: absolute;
+        display: block;
+      }
+
+      .login-box a span:nth-child(1) {
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #03e9f4);
+        animation: btn-anim1 1s linear infinite;
+      }
+
+      @keyframes btn-anim1 {
+        0% {
+          left: -100%;
+        }
+        50%,
+        100% {
+          left: 100%;
+        }
+      }
+
+      .login-box a span:nth-child(2) {
+        top: -100%;
+        right: 0;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(180deg, transparent, #03e9f4);
+        animation: btn-anim2 1s linear infinite;
+        animation-delay: 0.25s;
+      }
+
+      @keyframes btn-anim2 {
+        0% {
+          top: -100%;
+        }
+        50%,
+        100% {
+          top: 100%;
+        }
+      }
+
+      .login-box a span:nth-child(3) {
+        bottom: 0;
+        right: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(270deg, transparent, #03e9f4);
+        animation: btn-anim3 1s linear infinite;
+        animation-delay: 0.5s;
+      }
+
+      @keyframes btn-anim3 {
+        0% {
+          right: -100%;
+        }
+        50%,
+        100% {
+          right: 100%;
+        }
+      }
+
+      .login-box a span:nth-child(4) {
+        bottom: -100%;
+        left: 0;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(360deg, transparent, #ffffff);
+        animation: btn-anim4 1s linear infinite;
+        animation-delay: 0.75s;
+      }
+
+      @keyframes btn-anim4 {
+        0% {
+          bottom: -100%;
+        }
+        50%,
+        100% {
+          bottom: 100%;
+        }
+      } 
+
+
+      .card-form__button {
+        margin: auto;
+        width: 100%;
+
+        @media screen and (max-width: 576px) {
+          margin: 0 auto;
+        }
+
+        width: 100%;
+        height: 55px;
+        background: #2364d2;
+        border: none;
+        border-radius: 5px;
+        font-size: 22px;
+        font-weight: 500;
+        font-family: "Source Sans Pro", sans-serif;
+        box-shadow: 3px 10px 20px 0px rgba(35, 100, 210, 0.3);
+        color: #ffffff;
+        margin-top: 20px;
+        cursor: pointer;
+
+        @media screen and (max-width: 480px) {
+          margin-top: 10px;
+        }
+      }
+
+      .floating-label {
+        position: relative;
+        margin-bottom: 20px;
+      }
+      .floating-input,
+      .floating-select {
+        font-size: 16px;
+        padding: 4px 4px;
+        display: block;
+        width: 100%;
+        height: 30px;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid #ffffff;
+      }
+
+      .floating-input:focus,
+      .floating-select:focus {
+        outline: none;
+        border-bottom: 2px solid #03e9f4;
+      }
+
+      label {
+        color: #dbdcde;
+        font-size: 16px;
+        font-weight: normal;
+        position: absolute;
+        pointer-events: none;
+        left: 5px;
+        top: 5px;
+        transition: 0.2s ease all;
+        -moz-transition: 0.2s ease all;
+        -webkit-transition: 0.2s ease all;
+      }
+
+      .floating-input:focus ~ label,
+      .floating-input:not(:placeholder-shown) ~ label {
+        top: -18px;
+        font-size: 14px;
+        color: #03e9f4;
+      }
+
+      .floating-select:focus ~ label,
+      .floating-select:not([value=""]):valid ~ label {
+        top: -18px;
+        font-size: 14px;
+        color: #03e9f4;
+      }
+
+      /* active state */
+      .floating-input:focus ~ .bar:before,
+      .floating-input:focus ~ .bar:after,
+      .floating-select:focus ~ .bar:before,
+      .floating-select:focus ~ .bar:after {
+        width: 50%;
+      }
+
+      *,
+      *:before,
+      *:after {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+
+      .floating-textarea {
+        min-height: 40px;
+        max-height: 260px;
+        color: white;
+        overflow: hidden;
+        overflow-x: hidden;
+      }
+
+      /* active state */
+      .floating-input:focus ~ .highlight,
+      .floating-select:focus ~ .highlight {
+        -webkit-animation: inputHighlighter 0.3s ease;
+        -moz-animation: inputHighlighter 0.3s ease;
+        animation: inputHighlighter 0.3s ease;
+      }
+
+      /* animation */
+      @-webkit-keyframes inputHighlighter {
+        from {
+          background: #03e9f4;
+        }
+        to {
+          width: 0;
+          background: transparent;
+        }
+      }
+      @-moz-keyframes inputHighlighter {
+        from {
+          background: #03e9f4;
+        }
+        to {
+          width: 0;
+          background: transparent;
+        }
+      }
+      @keyframes inputHighlighter {
+        from {
+          background: #03e9f4;
+        }
+        to {
+          width: 0;
+          background: transparent;
+        }
+      }
+      .loader {
+        border: 5px solid #f3f3f3; /* Light grey */
+        border-top: 5px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 2s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    
+
+
+
+      /****  floating-Lable style end ****/
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="styleshee" href="styles.css" />
+  </head>
+  <body>
+    <div id="root">
+      <div class="login-box">
+        <div class="mb-2">
+          <label class="floating-label">
+            Enter States
+          </label>
+          <textarea
+            class="floating-input floating-textarea"
+            id="states-input-area"
+          >
+          </textarea>
+        </div>
+        <div class="mt-2">
+          <label class="floating-label">
+            Enter Goals
+          </label>
+          <textarea
+            class="floating-input floating-textarea"
+            id="goals-input-area"
+          >
+          </textarea>
+        </div>
+        
+        <div class="floating-label mt-4"> 
+          <h3 id="answer">
+          </h3>
+          
+        </div>
+        <button id="submit" type="submit" class="card-form__button">
+          SOLVE
+        </button>
+      </div>
+      
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="../static/js/gps.js" type="module"></script>
+  </body>
+</html>
