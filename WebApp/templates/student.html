@@ -11,7 +11,7 @@
         margin: 0;
         padding: 0;
         font-family: sans-serif;
-        background: linear-gradient(#141e30, #243b55);
+        background: #141e30;
       }
 
       p {
@@ -46,7 +46,7 @@
         resize: vertical;
         border: none;
         display: block;
-        min-height: 120px;
+        min-height: 0px;
         background-color: transparent;
         border-bottom: transparent;
       }
@@ -71,6 +71,7 @@
         left: 50%;
         min-width: 200px;
         width: 60%;
+        max-height: 80%;
         padding: 40px;
         transform: translate(-50%, -50%);
         background: rgba(0, 0, 0, 0.5);
@@ -140,7 +141,7 @@
 
       .floating-label {
         position: relative;
-        margin-bottom: 20px;
+        margin-bottom: 5px;
       }
       .floating-input,
       .floating-select {
@@ -204,7 +205,7 @@
       }
 
       .floating-textarea {
-        min-height: 120px;
+        min-height: 60px;
         max-height: 260px;
         color: white;
         overflow: hidden;
@@ -247,36 +248,37 @@
           background: transparent;
         }
       }
+      .navbar-brand {
+        padding-top: 0.3125rem;
+        padding-bottom: 0.3125rem;
+        font-size: 1.25rem;
+        align: center;
+        margin-top: 2vh;
+        margin-left: 47.5vw;
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+      }
 
       /****  floating-Lable style end ****/
     </style>
   </head>
   <body>
-    <nav class="navbar bg-dark mr-auto">
-      <div class="container-fluid">
-        <a class="navbar-brand text-white" href="/">PAIP</a>
+    <nav class="navbar bg-dark">
+      <div class="container-fluid pb-4">
+       <a class="navbar-brand text-white" href="/">PAIP</a>
       </div>
     </nav>
+
     <div class="login-box">
       <h2>STUDENT</h2>
       <p>
         STUDENT is an early AI program capable of solving high-school level
-        algebra word problems.<br /><br />Enter a word problem below to check it
+        algebra word problems. Enter a word problem below to check it
         out!
       </p>
       
-      <p style="font-size:14px;">
-        Note: 
-        <ul style="color:white;font-size:14px;">
-          <li>If your word problem contains the percentage symbol, please ensure that you space it out and type the symbol twice.
-            <br />
-            For example, if your question contains "20%", you would type it as "20 %%" instead.
-          </li>
-          <li>Result may take some time to load on first call.</li>
-        </ul>
-      </p>
-      
-      <br /><br />
+      <br />
       <form class="msger-inputarea">
         <div class="floating-label">
           <textarea
@@ -296,8 +298,6 @@
         <br />
 
         <button id="show-intermediates-btn" class="show-intermediates-btn">Show Intermediate Steps</button>
-        
-        <br /> <br />
         
         <div id="show-intermediates-div" class="show-intermediates-div" style="display:none;"></div>
         
