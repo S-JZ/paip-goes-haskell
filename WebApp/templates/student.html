@@ -87,6 +87,11 @@
         text-align: center;
       }
 
+    
+      .login-box a {
+        color: #2364d2;
+        text-decoration: none;
+      }
       .card-form-button {
         margin: auto;
         width: 100%;
@@ -267,12 +272,12 @@
   <body>
     <nav class="navbar bg-dark">
       <div class="container-fluid pb-4">
-       <a class="navbar-brand text-white" href="/">PAIP</a>
+       {% comment %} <a class="navbar-brand text-white" href="/">PAIP</a> {% endcomment %}
       </div>
     </nav>
 
     <div class="login-box">
-      <h2>STUDENT</h2>
+      <h2><a class="text-white" href="/">PAIP </a> / STUDENT</h2>
       <p>
         STUDENT is an early AI program capable of solving high-school level
         algebra word problems. Enter a word problem below to check it
