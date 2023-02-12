@@ -2,12 +2,9 @@
 
 Implementations of early AI programs from the fantastic textbook 'Paradigms of Artificial Intelligence Programming' by Peter Norvig, originally written in Lisp, in Haskell and Golang.
 
-Catch the programs in action here: _Link to Deployment_
+Catch the programs in action here: https://paip.azurewebsites.net/
 
-Check out the documentation for each case study: _Link to Docs_
-
-## Table of Contents
-_</ToC to be added in the end_
+Check out the documentation for each case study: _Work In Progress_
 
 ## :book: About PAIP
 
