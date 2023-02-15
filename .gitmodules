@@ -2,6 +2,6 @@
 	path = Case Studies/STUDENT/student-go-api
 	url = https://gitlab.com/indujashankar/student-go-api
 
-[submodule "WebApp"]
-	path = WebApp
+[submodule "WebApp/paip-web"]
+	path = WebApp/paip-web
 	url = https://gitlab.com/sristi0108/paip-web
