@@ -7,7 +7,8 @@ const submitBtn = document.querySelector("#submit")
 let statesText = ""
 let goalsText = ""
 
-let gpsBaseURL = "https://eliza.azurewebsites.net/api/gps?code=F0wwiGHDQh6Phxu7-mbM5Cr70YhuX_uBm4MeUExvqkNQAzFuPEaStQ==&"
+// let gpsBaseURL = "https://eliza.azurewebsites.net/api/gps?code=F0wwiGHDQh6Phxu7-mbM5Cr70YhuX_uBm4MeUExvqkNQAzFuPEaStQ==&"
+let gpsBaseURL = config.GPS_KEY
 
 const prefix = "Executing"
 const requestOptions = {

@@ -319,10 +319,12 @@
       </form>
     </div>
 
+    <script type='text/javascript' src='config.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+    
     <script>
       const msgForm = get(".msger-inputarea");
       /* // get the textarea element */
@@ -340,6 +342,8 @@
       var infix = "";
       var substituted = "";
       
+      var studentBaseURL = config.STUDENT_KEY
+      console.log(studentBaseURL)
       /* // Wait for the page to load first */
       window.onload = function() {
 
@@ -363,6 +367,7 @@
 
       /* // add a click event listener to the submit button */
       msgForm.addEventListener("submit", (event) => {
+        
         resultDiv.innerHTML = "";
         resultDiv.insertAdjacentHTML("beforeend", "Loading...");
         event.preventDefault();
@@ -427,8 +432,8 @@
       
 
       function student(rawText) {
-        // Bot Response
-        $.get(`https://student-go.onrender.com/paip/student/${rawText}`).done(
+        /* Bot Response */
+        $.get(studentBaseURL + `${rawText}`).done(
           function (data) {
             console.log(rawText);
             console.log(data);
@@ -440,7 +445,7 @@
         $("#try-again-div").show();
       }
 
-      // Utils
+      /* Utils */
       function get(selector, root = document) {
         return root.querySelector(selector);
       }
