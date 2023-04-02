@@ -1,3 +1,0 @@
-# Eliza
-
-## What is Eliza?
