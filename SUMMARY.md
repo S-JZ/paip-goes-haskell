@@ -6,6 +6,6 @@
 
 * [GPS](case-studies/gps.md)
 * [Eliza](case-studies/eliza/README.md)
-  * [Objectives](case-studies/eliza/objectives/README.md)
-    * [Code Overview](case-studies/eliza/objectives/code-overview.md)
+  * [Objectives](case-studies/eliza/objectives.md)
+  * [Code Overview](case-studies/eliza/code-overview.md)
 * [Student](case-studies/student.md)
