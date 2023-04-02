@@ -4,8 +4,6 @@ Implementations of early AI programs from the fantastic textbook 'Paradigms of A
 
 Catch the programs in action here: [https://static-psi-murex.vercel.app/home.html](https://static-psi-murex.vercel.app/home.html)
 
-#### 📖 About PAIP <a href="#user-content-book-about-paip" id="user-content-book-about-paip"></a>
-
 #### ⭐ Why PAIP Go-es Haskell? \~ Motivation <a href="#user-content-star-why-paip-go-es-haskell-motivation" id="user-content-star-why-paip-go-es-haskell-motivation"></a>
 
 LISP, Haskell and Golang are entirely new languages that we are picking up during the course of this project. We intend to analyze the different forms of expression, the frame of thinking, and the logical approaches taken by these languages. The goal is to learn about the techniques illustrated by the case studies in the book and use them to solve a wider range of problems.
